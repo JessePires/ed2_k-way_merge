@@ -1,5 +1,6 @@
 #include "buffer.h"
 
+
 Buffer* criarBuffer(char* arquivo){
   Buffer *buffer = malloc(sizeof(Buffer));
   buffer->vet = calloc(STEPOFREAD, sizeof(ITEM_VENDA));

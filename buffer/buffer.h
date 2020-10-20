@@ -1,5 +1,7 @@
 #pragma once
-#include "./big_file.h"
+#include "../big_file.h"
+#include <stdio.h>
+#include <stdlib.h>
 #define STEPOFREAD 10
 
 typedef struct Buffer{
