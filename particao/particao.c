@@ -5,14 +5,16 @@
 #include "stdio.h"
 #include <math.h>
 
-void criarParticao(char *arquivo, int limite){
+#define PKQTD (1024*100)
+
+void criarParticao(char *arquivo){
     // int aux = limite;
   FILE *arq = fopen(arquivo, "rb");
 
   fseek(arq, 0, SEEK_END);
   unsigned long int tamanho = ftell(arq)/1024;
   fseek(arq, 0, SEEK_SET);
-  int pk = ceil((float)tamanho/limite);
+  int pk = ceil((float)tamanho/PKQTD);
   
   int resto = tamanho;
   for(int i = 0; i < pk; i++){ 
@@ -24,10 +26,10 @@ void criarParticao(char *arquivo, int limite){
     strcat(nome1, extensao);
 
     FILE *destino = fopen(nome1, "wb");
-    ITEM_VENDA *aux = calloc(limite, sizeof(ITEM_VENDA));
+    ITEM_VENDA *aux = calloc(PKQTD, sizeof(ITEM_VENDA));
 
-    resto -= limite;
-    int tam = (resto < 0) ? resto+limite : limite;
+    resto -= PKQTD;
+    int tam = (resto < 0) ? resto+PKQTD : PKQTD;
     fread(aux, sizeof(ITEM_VENDA), tam, arq);
     fwrite(aux, sizeof(ITEM_VENDA), tam, destino);
     fclose(destino);
