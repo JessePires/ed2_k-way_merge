@@ -20,7 +20,6 @@ static void embaralhar(ITEM_VENDA* v, int ini, int fim){
         j = j <= ini? ini+1 : j;
         trocar(&v[i], &v[j]);
     }
-
 }
 
 void gerar_array_iv(const char* arquivo_saida, unsigned int n_registros, int seed){
@@ -50,10 +49,8 @@ void gerar_array_iv(const char* arquivo_saida, unsigned int n_registros, int see
         exit(1);
     }
 
-
     fwrite(iv, sizeof(ITEM_VENDA), n_registros, saida);
     fclose(saida);
-
 
     return;
 }
