@@ -8,7 +8,6 @@
 #define PKQTD (1024*100)
 
 void criarParticao(char *arquivo){
-    // int aux = limite;
   FILE *arq = fopen(arquivo, "rb");
 
   fseek(arq, 0, SEEK_END);
