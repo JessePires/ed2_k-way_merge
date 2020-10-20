@@ -1,13 +1,14 @@
 #include "buffer.h"
 
-Buffer* criarBuffer(char* arquivo, int bytes){
+Buffer* criarBuffer(char* arquivo, int qtdRegistros){
   Buffer *buffer = malloc(sizeof(Buffer));
-  buffer->vet = calloc(bytes, sizeof(ITEM_VENDA));
-  buffer->maxsize = bytes;
-  buffer->qtd = 0;
+  buffer->vet = calloc(qtdRegistros, sizeof(ITEM_VENDA));
+  buffer->maxsize = qtdRegistros;
+  buffer->qtdRegistros = 0;
   buffer->proximo = -1;
 
   buffer->arq = fopen(arquivo, "rb");
+  fread(buffer->vet, sizeof(ITEM_VENDA), qtdRegistros, buffer->arq);
   return buffer;
 }
 

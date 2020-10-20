@@ -10,7 +10,7 @@ typedef struct Buffer{
   FILE *arq;
 } Buffer;
 
-Buffer* criarBuffer(char* arquivo, int bytes);
+Buffer* criarBuffer(char* arquivo, int qtdRegistros);
 void deletarBugger(Buffer *buffer);
 
 int proximoBuffer(Buffer* buffer);
