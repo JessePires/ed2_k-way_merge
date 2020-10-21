@@ -2,6 +2,7 @@
 #include "../big_file.h"
 #include <stdio.h>
 #include <stdlib.h>
+
 #define STEPOFREAD 10
 
 typedef struct Buffer{
@@ -12,4 +13,4 @@ typedef struct Buffer{
 } Buffer;
 
 Buffer* criarBuffer(char* arquivo);
-void deletarBugger(Buffer *buffer);
+void deletarBuffer(Buffer *buffer);

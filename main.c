@@ -10,5 +10,7 @@ int main(int argc, char** argv){
 
     criarParticao("teste.dat", (1024*100));
 
+    teste_ordenacao_particao("p1");
+
     return 0;
 }

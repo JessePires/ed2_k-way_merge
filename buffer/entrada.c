@@ -11,7 +11,7 @@ Buffer* criarBuffer(char* arquivo){
   return buffer;
 }
 
-void deletarBugger(Buffer *buffer){
+void deletarBuffer(Buffer *buffer){
   fclose(buffer->arq);
   free(buffer->vet);
   free(buffer);
