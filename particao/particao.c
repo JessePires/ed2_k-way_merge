@@ -7,17 +7,15 @@
 #include <inttypes.h>
 #include <math.h>
 
-void criarParticao(char *arquivo, int limite){
-    // int aux = limite;
+void criarParticao(char *arquivo, int qtdParticoes){
   FILE *arq = fopen(arquivo, "rb");
 
   fseek(arq, 0, SEEK_END);
-  unsigned long int tamanho = ftell(arq)/1024;
+  int resto = ftell(arq);
+  unsigned long int tamanho = ftell(arq)/(1024*qtdParticoes);
   fseek(arq, 0, SEEK_SET);
-  int pk = ceil((float)tamanho/limite);
   
-  int resto = tamanho;
-  for(int i = 0; i < pk; i++){ 
+  for(int i = 0; i < qtdParticoes; i++){ 
     char numero[1];
     char extensao[] = ".dat";
     char nome1[20] = "p";
@@ -26,10 +24,10 @@ void criarParticao(char *arquivo, int limite){
     strcat(nome1, extensao);
 
     FILE *destino = fopen(nome1, "wb");
-    ITEM_VENDA *aux = calloc(limite, sizeof(ITEM_VENDA));
+    ITEM_VENDA *aux = calloc(tamanho, sizeof(ITEM_VENDA));
 
-    resto -= limite;
-    int tam = (resto < 0) ? resto+limite : limite;
+    resto -= tamanho;
+    int tam = (resto < 0) ? resto+tamanho : tamanho;
     fread(aux, sizeof(ITEM_VENDA), tam, arq);
     quickSort(aux, 0, tam);
     fwrite(aux, sizeof(ITEM_VENDA), tam, destino);

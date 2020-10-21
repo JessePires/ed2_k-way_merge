@@ -1,18 +1,25 @@
 #include "buffer.h"
 
-
-Buffer* criarBuffer(char* arquivo){
-  Buffer *buffer = malloc(sizeof(Buffer));
-  buffer->vet = calloc(STEPOFREAD, sizeof(ITEM_VENDA));
-  buffer->maxsize = STEPOFREAD;
-  buffer->qtd = 0;
-
-  buffer->arq = fopen(arquivo, "rb");
-  return buffer;
+int proximoBuffer(Buffer* buffer){
+  if(buffer == NULL) return -1;
+  return buffer->proximo+1;
 }
 
+ITEM_VENDA* consomeBuffer(Buffer* buffer, int i){
+  if(buffer == NULL) return NULL; 
+  return &buffer->vet[i];
+}
+
+<<<<<<< HEAD
 void deletarBuffer(Buffer *buffer){
   fclose(buffer->arq);
   free(buffer->vet);
   free(buffer);
 }
+=======
+int vazioBuffer(Buffer* buffer){
+  if(buffer == NULL) return 1;
+  
+  return (buffer->proximo == buffer->maxsize) ? 0: 1;
+}
+>>>>>>> c209dcc38a4aa08811dca5255aca99918c46fe21
