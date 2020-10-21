@@ -12,5 +12,9 @@ typedef struct Buffer{
   FILE *arq;
 } Buffer;
 
-Buffer* criarBuffer(char* arquivo, int qtdRegistros, FILE *arq_buffer);
+Buffer* criarBufferEntrada(char* arquivo, unsigned long int qtdRegistros, FILE *arq_buffer);
+Buffer* criarBufferSaida(char* arquivo, unsigned long int qtdRegistros);
 void deletarBuffer(Buffer *buffer);
+
+void inserirRegistro (Buffer *buffer, char *arquivo, ITEM_VENDA *item);
+void despejarBuffer (Buffer *buffer, char *nome_arquivo, int qtdRegistros);

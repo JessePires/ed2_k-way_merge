@@ -1,5 +1,17 @@
 #include "buffer.h"
 
+Buffer* criarBufferEntrada(char* arquivo, unsigned long int qtdRegistros, FILE *arq_buffer){
+  Buffer *buffer = malloc(sizeof(Buffer));
+  buffer->vet = calloc(qtdRegistros, sizeof(ITEM_VENDA));
+  buffer->maxsize = qtdRegistros;
+  buffer->proximo = -1;
+
+  if(arq_buffer == NULL) arq_buffer = fopen(arquivo, "rb");
+  fread(buffer->vet, sizeof(ITEM_VENDA), qtdRegistros, arq_buffer);
+  buffer->arq = arq_buffer;
+  return buffer;
+}
+
 int proximoBuffer(Buffer* buffer){
   if(buffer == NULL) return -1;
   return buffer->proximo+1;
