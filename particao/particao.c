@@ -29,7 +29,7 @@ void criarParticao(char *arquivo, int qtdParticoes){
     resto -= tamanho;
     int tam = (resto < 0) ? resto+tamanho : tamanho;
     fread(aux, sizeof(ITEM_VENDA), tam, arq);
-    quickSort(aux, 0, tam);
+    quickSort(aux, 0, tam-1);
     fwrite(aux, sizeof(ITEM_VENDA), tam, destino);
     fclose(destino);
     if(resto < 0) break;

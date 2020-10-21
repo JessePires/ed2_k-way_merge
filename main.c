@@ -9,7 +9,7 @@ int main(int argc, char** argv){
 
     criarParticao("teste.dat", 4);
 
-    teste_ordenacao_particao("p1");
+    teste_ordenacao_particao("p1.dat");
 
     return 0;
 }
