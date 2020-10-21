@@ -14,5 +14,5 @@ Buffer* criarBuffer(char* arquivo, int qtdRegistros);
 void deletarBugger(Buffer *buffer);
 
 int proximoBuffer(Buffer* buffer);
-Buffer* consomeBuffer(Buffer* buffer, int i);
+ITEM_VENDA* consomeBuffer(Buffer* buffer, int i);
 int vazioBuffer(Buffer* buffer); 

@@ -5,9 +5,9 @@ int proximoBuffer(Buffer* buffer){
   return buffer->proximo+1;
 }
 
-Buffer* consomeBuffer(Buffer* buffer, int i){
+ITEM_VENDA* consomeBuffer(Buffer* buffer, int i){
   if(buffer == NULL) return NULL; 
-  return buffer->vet[i];
+  return &buffer->vet[i];
 }
 
 int vazioBuffer(Buffer* buffer){

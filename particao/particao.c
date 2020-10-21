@@ -5,18 +5,15 @@
 #include "stdio.h"
 #include <math.h>
 
-#define PKQTD (1024*100)
-
-void criarParticao(char *arquivo){
+void criarParticao(char *arquivo, int qtdParticoes){
   FILE *arq = fopen(arquivo, "rb");
 
   fseek(arq, 0, SEEK_END);
-  unsigned long int tamanho = ftell(arq)/1024;
+  int resto = ftell(arq);
+  unsigned long int tamanho = ftell(arq)/(1024*qtdParticoes);
   fseek(arq, 0, SEEK_SET);
-  int pk = ceil((float)tamanho/PKQTD);
   
-  int resto = tamanho;
-  for(int i = 0; i < pk; i++){ 
+  for(int i = 0; i < qtdParticoes; i++){ 
     char numero[1];
     char extensao[] = ".dat";
     char nome1[20] = "p";
@@ -25,10 +22,10 @@ void criarParticao(char *arquivo){
     strcat(nome1, extensao);
 
     FILE *destino = fopen(nome1, "wb");
-    ITEM_VENDA *aux = calloc(PKQTD, sizeof(ITEM_VENDA));
+    ITEM_VENDA *aux = calloc(tamanho, sizeof(ITEM_VENDA));
 
-    resto -= PKQTD;
-    int tam = (resto < 0) ? resto+PKQTD : PKQTD;
+    resto -= tamanho;
+    int tam = (resto < 0) ? resto+tamanho : tamanho;
     fread(aux, sizeof(ITEM_VENDA), tam, arq);
     fwrite(aux, sizeof(ITEM_VENDA), tam, destino);
     fclose(destino);
