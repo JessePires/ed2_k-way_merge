@@ -1,5 +1,5 @@
 #pragma once
 #include "../big_file.h"
 
-void criarParticao(char *arquivo, int limite);
+char **criarParticao(char *arquivo, int qtdParticoes);
 void teste_ordenacao_particao (char *arquivo);
