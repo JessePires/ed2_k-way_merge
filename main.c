@@ -11,16 +11,21 @@
 
 void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_buffer_entrada){
   int qtd_buffers_vazios = 0;
+  ITEM_VENDA teste = entrada[0]->vet[1];
 
-  while (qtd_buffers_vazios < qtd_buffer_entrada) {
+  while (qtd_buffers_vazios <= qtd_buffer_entrada) {
     Buffer *menor = entrada[0];
     for(int i = 0; i < qtd_buffer_entrada; i++){
-      if (!vazio(entrada[i])) 
-        if(menor->vet[0].id > entrada[i]->vet[0].id) menor = entrada[i];
-      else qtd_buffers_vazios++;
+      if (!vazio(entrada[i])){
+        if(menor->vet[menor->proximo].id > entrada[i]->vet[entrada[i]->proximo].id) menor = entrada[i];
+      }else qtd_buffers_vazios++;
     }
 
     ITEM_VENDA *menor_item = consomeBuffer(menor, proximoBuffer(menor));
+    // if(qtd_buffers_vazios == 3){
+    //   printf("dawdawdaw");
+    //   printf("dawdaw");
+    // }
     printf("ID_MENOR: %"PRIu32"\n", menor_item->id);
     inserirRegistroBufferSaida(saida, menor_item);
   }
@@ -41,6 +46,7 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   for(int i = 0; i < k; i++) {
     buffer_entrada[i] = criarBufferEntrada(pk[i], qtd_registro_entrada, NULL);
   }
+
   Buffer *buffer_saida = criarBufferSaida(nome_saida, bytes_buffer_saida/sizeof(ITEM_VENDA));
 
   intercalacao_k_vias(buffer_entrada, buffer_saida, k);
