@@ -12,14 +12,15 @@ typedef struct Buffer{
   FILE *arq;
 } Buffer;
 
-Buffer* criarBufferEntrada(char* arquivo, unsigned long int qtdRegistros);
-Buffer* criarBufferSaida(char* arquivo, unsigned long int qtdRegistros);
-void deletarBuffer(Buffer *buffer);
-ITEM_VENDA* consomeBuffer(Buffer* buffer, int i);
-void inserirRegistroBufferSaida (Buffer *buffer, ITEM_VENDA *item);
+Buffer* BUFFER_ENTRADA_criar(char* arquivo, unsigned long int qtdRegistros);
+int BUFFER_ENTRADA_proximo(Buffer* buffer);
+ITEM_VENDA* BUFFER_ENTRADA_consumir(Buffer* buffer, int i);
+int BUFFER_ENTRADA_vazio(Buffer *buffer);
+int BUFFER_ENTRADA_bufferVazio(Buffer *buffer);
+void BUFFER_ENTRADA_reencher(Buffer* buffer);
 
-void despejarBufferSaida (Buffer *buffer);
-int proximoBuffer(Buffer* buffer);
-int vazio(Buffer *buffer);
-void reencherBuffer(Buffer* buffer);
-int bufferVazio(Buffer *buffer);
+Buffer* BUFFER_SAIDA_criar(char* arquivo, unsigned long int qtdRegistros);
+void BUFFER_SAIDA_inserirRegistro (Buffer *buffer, ITEM_VENDA *item);
+void BUFFER_SAIDA_despejar (Buffer *buffer);
+
+void BUFFER_deletar(Buffer *buffer);

@@ -1,6 +1,6 @@
 #include "buffer.h"
 
-Buffer* criarBufferSaida(char *arquivo, unsigned long int qtdRegistros){
+Buffer* BUFFER_SAIDA_criar(char *arquivo, unsigned long int qtdRegistros){
   Buffer *buffer = malloc(sizeof(Buffer));
 
   buffer->vet = calloc(qtdRegistros, sizeof(ITEM_VENDA));
@@ -12,14 +12,14 @@ Buffer* criarBufferSaida(char *arquivo, unsigned long int qtdRegistros){
   return buffer;
 }
 
-void inserirRegistroBufferSaida (Buffer *buffer, ITEM_VENDA *item) {
-  if (buffer->proximo == buffer->maxsize) despejarBufferSaida(buffer);
+void BUFFER_SAIDA_inserirRegistro (Buffer *buffer, ITEM_VENDA *item) {
+  if (buffer->proximo == buffer->maxsize) BUFFER_SAIDA_despejar(buffer);
 
   buffer->vet[buffer->proximo] = *item;
   buffer->proximo++;
 }
 
-void despejarBufferSaida (Buffer *buffer) {
+void BUFFER_SAIDA_despejar (Buffer *buffer) {
   fwrite(buffer->vet, sizeof(ITEM_VENDA), buffer->proximo, buffer->arq);
   buffer->proximo = 0;
 }
