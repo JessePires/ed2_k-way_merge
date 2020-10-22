@@ -9,10 +9,16 @@
 #define MB10 10485760
 
 void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_buffer_entrada){
-  Buffer *menor = (*entrada)[0];
-  for(int i = 0; i < qtd_registro_entrada; i++){
-    if(menor->vet[0].id < (*entrada)[i].vet[0].id){
-      menor = (*entrada)[i];
+  int qtd_buffers_vazios = 0;
+
+  while (qtd_buffers_vazios < qtd_buffer_entrada) {
+    Buffer *menor = (*entrada)[0];
+    for(int i = 0; i < qtd_registro_entrada; i++){
+      if (!vazio(entrada[i])) {
+        if(menor->vet[0].id < (*entrada)[i].vet[0].id){
+          menor = (*entrada)[i];
+        }
+      } else qtd_buffers_vazios++;
     }
   }
 }
