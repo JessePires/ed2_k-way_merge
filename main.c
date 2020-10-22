@@ -20,6 +20,9 @@ void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_
         }
       } else qtd_buffers_vazios++;
     }
+
+    ITEM_VENDA menor_item = consomeBuffer(menor, 0);
+    inserirRegistroBufferSaida(saida, menor_item);
   }
 }
 
