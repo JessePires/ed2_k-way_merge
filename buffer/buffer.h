@@ -12,7 +12,7 @@ typedef struct Buffer{
   FILE *arq;
 } Buffer;
 
-Buffer* criarBufferEntrada(char* arquivo, unsigned long int qtdRegistros, FILE *arq_buffer);
+Buffer* criarBufferEntrada(char* arquivo, unsigned long int qtdRegistros);
 Buffer* criarBufferSaida(char* arquivo, unsigned long int qtdRegistros);
 void deletarBuffer(Buffer *buffer);
 ITEM_VENDA* consomeBuffer(Buffer* buffer, int i);
