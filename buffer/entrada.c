@@ -1,9 +1,8 @@
 #include "buffer.h"
 #include <inttypes.h>
 void reencherBuffer(Buffer* buffer){
-  unsigned long int restoRegistros, step;
   fpos_t posAtual;
-  unsigned long int posFinal, qtdBytes;
+  unsigned long int posFinal, qtdBytes, restoRegistros, step;
   
   fgetpos(buffer->arq, &posAtual);
   fseek(buffer->arq, 0, SEEK_END);
@@ -38,13 +37,15 @@ Buffer* criarBufferEntrada(char* arquivo, unsigned long int qtdRegistros){
 int proximoBuffer(Buffer* buffer){
   if(buffer == NULL) return -1;
 
-  if(buffer->proximo == buffer->maxsize)  reencherBuffer(buffer);
-  if(buffer->proximo < buffer->maxsize) return buffer->proximo++;
+  return buffer->proximo++;
 }
 
 ITEM_VENDA* consomeBuffer(Buffer* buffer, int i){
-  if(buffer == NULL) return NULL; 
-  return &buffer->vet[i];
+  if(buffer == NULL) return NULL;
+  ITEM_VENDA *retorno = calloc(1, sizeof(ITEM_VENDA));
+  *retorno = buffer->vet[i];
+  if(buffer->proximo == buffer->maxsize)  reencherBuffer(buffer);
+  return retorno;
 }
 
 int vazio(Buffer *buffer){

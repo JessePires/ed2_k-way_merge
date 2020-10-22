@@ -16,11 +16,11 @@ void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_
   while (qtd_buffers_vazios < qtd_buffer_entrada) {
     Buffer *menor;
     uint32_t auxmenor = INT32_MAX;
+    uint32_t b4;
 
     qtd_buffers_vazios = 0;
     for(int i = 0; i < qtd_buffer_entrada; i++){
-      for(int j = 0; j < qtd_buffer_entrada; j++) 
-        if(bufferVazio(entrada[j]) && !vazio(entrada[j])) reencherBuffer(entrada[j]);
+      b4 = entrada[3]->vet[entrada[3]->proximo].id;
         if (!bufferVazio(entrada[i])){
           if(auxmenor > entrada[i]->vet[entrada[i]->proximo].id){
             auxmenor = entrada[i]->vet[entrada[i]->proximo].id;
@@ -30,6 +30,11 @@ void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_
     }
 
     if(auxmenor != INT32_MAX){
+      if(auxmenor == 25341){
+        ITEM_VENDA teste = menor->vet[menor->proximo];
+        printf("lalal");
+        
+      }
       ITEM_VENDA *menor_item = consomeBuffer(menor, proximoBuffer(menor));
       // printf("ID_MENOR: %"PRIu32"\n", menor_item->id);
       inserirRegistroBufferSaida(saida, menor_item);
