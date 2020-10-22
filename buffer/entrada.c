@@ -1,17 +1,5 @@
 #include "buffer.h"
 
-Buffer* criarBufferEntrada(char* arquivo, unsigned long int qtdRegistros, FILE *arq_buffer){
-  Buffer *buffer = malloc(sizeof(Buffer));
-  buffer->vet = calloc(qtdRegistros, sizeof(ITEM_VENDA));
-  buffer->maxsize = qtdRegistros;
-  buffer->proximo = 0;
-
-  if(arq_buffer == NULL) arq_buffer = fopen(arquivo, "rb");
-  fread(buffer->vet, sizeof(ITEM_VENDA), qtdRegistros, arq_buffer);
-  buffer->arq = arq_buffer;
-  return buffer;
-}
-
 static void reencherBuffer(Buffer* buffer){
   if(buffer == NULL) return NULL;
   unsigned long int qtdBytes, posAtual, posFinal, restoRegistros, step;
@@ -31,17 +19,24 @@ static void reencherBuffer(Buffer* buffer){
 
 }
 
+Buffer* criarBufferEntrada(char* arquivo, unsigned long int qtdRegistros, FILE *arq_buffer){
+  Buffer *buffer = malloc(sizeof(Buffer));
+  buffer->vet = calloc(qtdRegistros, sizeof(ITEM_VENDA));
+  buffer->maxsize = qtdRegistros;
+  buffer->proximo = 0;
+
+  if(arq_buffer == NULL) arq_buffer = fopen(arquivo, "rb");
+  fread(buffer->vet, sizeof(ITEM_VENDA), qtdRegistros, arq_buffer);
+  buffer->arq = arq_buffer;
+  return buffer;
+}
+
 int proximoBuffer(Buffer* buffer){
   if(buffer == NULL) return -1;
 
-  if(vazioBuffer(buffer))  reencherBuffer(buffer);
+  if(buffer->proximo == buffer->maxsize)  reencherBuffer(buffer);
 
   return buffer->proximo+1;
-}
-
-int vazioBuffer(Buffer *buffer){
-  if(buffer->proximo == buffer->maxsize) return 1;
-  return 0;
 }
 
 ITEM_VENDA* consomeBuffer(Buffer* buffer, int i){
@@ -49,6 +44,19 @@ ITEM_VENDA* consomeBuffer(Buffer* buffer, int i){
   return &buffer->vet[i];
 }
 
+int vazio(Buffer *buffer){
+  if(buffer == NULL) return 1;
+
+  unsigned long int qtdBytes, posAtual, posFinal, restoRegistros;
+  fgetpos(buffer->arq, &posAtual);
+  fseek(buffer->arq, 0, SEEK_END);
+  fgetpos(buffer->arq, &posFinal);
+  fsetpos(buffer->arq, &posAtual);
+
+  restoRegistros = (posFinal - posAtual)/sizeof(ITEM_VENDA);
+
+  return (restoRegistros == 0) ? 1 : 0;
+}
 
 void deletarBuffer(Buffer *buffer){
   fclose(buffer->arq);
