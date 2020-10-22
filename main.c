@@ -20,14 +20,13 @@ void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_
     qtd_buffers_vazios = 0;
     for(int i = 0; i < qtd_buffer_entrada; i++){
       for(int j = 0; j < qtd_buffer_entrada; j++) 
-        if(entrada[j]->proximo == entrada[j]->maxsize) reencherBuffer(entrada[j]);
-
-      if (entrada[i]->proximo != entrada[i]->maxsize){
-        if(auxmenor > entrada[i]->vet[entrada[i]->proximo].id){
-          auxmenor = entrada[i]->vet[entrada[i]->proximo].id;
-          menor = entrada[i];
-        }
-      }else qtd_buffers_vazios++;
+        if(bufferVazio(entrada[j]) && !vazio(entrada[j])) reencherBuffer(entrada[j]);
+        if (!bufferVazio(entrada[i])){
+          if(auxmenor > entrada[i]->vet[entrada[i]->proximo].id){
+            auxmenor = entrada[i]->vet[entrada[i]->proximo].id;
+            menor = entrada[i];
+          }
+        }else qtd_buffers_vazios++;
     }
 
     if(auxmenor != INT32_MAX){

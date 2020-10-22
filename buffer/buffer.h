@@ -22,3 +22,4 @@ void despejarBufferSaida (Buffer *buffer);
 int proximoBuffer(Buffer* buffer);
 int vazio(Buffer *buffer);
 void reencherBuffer(Buffer* buffer);
+int bufferVazio(Buffer *buffer);

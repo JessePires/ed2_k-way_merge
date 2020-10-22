@@ -63,6 +63,10 @@ int vazio(Buffer *buffer){
   return (restoRegistros == 0) ? 1 : 0;
 }
 
+int bufferVazio(Buffer *buffer){
+  return (buffer->proximo == buffer->maxsize) ? 1 : 0;
+}
+
 void deletarBuffer(Buffer *buffer){
   fclose(buffer->arq);
   free(buffer->vet);
