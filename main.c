@@ -19,13 +19,13 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   fclose(arq);
   
   int k = ceil((float)e/bytes_registros);
-  unsigned long int qtd_registro_entrada = floor(((float)(bytes_registros-bytes_buffer_saida)/k)/1024);
+  unsigned long int qtd_registro_entrada = floor(((float)(bytes_registros-bytes_buffer_saida)/k)/sizeof(ITEM_VENDA));
   char **pk = criarParticao("teste.dat", k);
 
   //CRIANDO BUFFER
   Buffer **buffer_entrada = calloc(k, sizeof(Buffer*));
   for(int i = 0; i < k; i++) *buffer_entrada = criarBufferEntrada(pk[i], qtd_registro_entrada, NULL);
-  Buffer *buffer_saida = criarBufferSaida(nome_saida, bytes_buffer_saida/1024);
+  Buffer *buffer_saida = criarBufferSaida(nome_saida, bytes_buffer_saida/sizeof(ITEM_VENDA));
 
   intercalacao_k_vias(buffer_entrada, buffer_saida);
   printf("TESTE");
@@ -35,10 +35,7 @@ int main(int argc, char** argv){
   printf("sizeof(ITEM_VENDA) = %ld\n", sizeof(ITEM_VENDA));
   // gerar_array_iv("teste.dat", (1572864/5), 42);
   
-  ordenacao_externa("teste.dat", 104857600, 10485760, "saida.dat");
-
-
-  teste_ordenacao_particao("p1.dat");
-
+  ordenacao_externa("teste.dat", MB100, MB10, "saida.dat");
   return 0;
 }
+ 

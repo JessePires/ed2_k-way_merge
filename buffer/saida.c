@@ -22,8 +22,6 @@ void inserirRegistroBufferSaida (Buffer *buffer, ITEM_VENDA *item) {
 }
 
 void despejarBufferSaida (Buffer *buffer) {
-  if (qtdRegistros <= 0) return;
-
   fwrite(buffer->vet, sizeof(ITEM_VENDA), buffer->proximo, buffer->arq);
   buffer->proximo = 0;
 }

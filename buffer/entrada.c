@@ -1,5 +1,24 @@
 #include "buffer.h"
 
+static void reencherBuffer(Buffer* buffer){
+  if(buffer == NULL) return NULL;
+  unsigned long int qtdBytes, posAtual, posFinal, restoRegistros, step;
+  fgetpos(buffer->arq, &posAtual);
+  fseek(buffer->arq, 0, SEEK_END);
+  fgetpos(buffer->arq, &posFinal);
+  fsetpos(buffer->arq, &posAtual);
+
+  restoRegistros = (posFinal - posAtual)/sizeof(ITEM_VENDA);
+  
+  if(restoRegistros > buffer->maxsize) step = buffer->maxsize;
+  else  step = restoRegistros;
+
+  buffer->proximo = 0;
+  buffer->maxsize = step;
+  fread(buffer->arq, sizeof(ITEM_VENDA), step, buffer->arq);
+
+}
+
 Buffer* criarBufferEntrada(char* arquivo, unsigned long int qtdRegistros, FILE *arq_buffer){
   Buffer *buffer = malloc(sizeof(Buffer));
   buffer->vet = calloc(qtdRegistros, sizeof(ITEM_VENDA));
@@ -14,6 +33,9 @@ Buffer* criarBufferEntrada(char* arquivo, unsigned long int qtdRegistros, FILE *
 
 int proximoBuffer(Buffer* buffer){
   if(buffer == NULL) return -1;
+
+  if(buffer->proximo == buffer->maxsize)  reencherBuffer(buffer);
+
   return buffer->proximo+1;
 }
 

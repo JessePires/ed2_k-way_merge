@@ -13,7 +13,7 @@ char **criarParticao(char *arquivo, int qtdParticoes){
 
   fseek(arq, 0, SEEK_END);
   int resto = ftell(arq);
-  unsigned long int tamanho = ftell(arq)/(1024*qtdParticoes);
+  unsigned long int tamanho = ftell(arq)/(sizeof(ITEM_VENDA)*qtdParticoes);
   fseek(arq, 0, SEEK_SET);
   
   for(int i = 0; i < qtdParticoes; i++){ 
