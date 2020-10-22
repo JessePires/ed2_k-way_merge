@@ -2,6 +2,8 @@
 
 Buffer* criarBufferSaida(char *arquivo, unsigned long int qtdRegistros){
   Buffer *buffer = malloc(sizeof(Buffer));
+
+
   buffer->vet = calloc(qtdRegistros, sizeof(ITEM_VENDA));
   buffer->maxsize = qtdRegistros;
   buffer->proximo = 0;
