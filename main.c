@@ -19,14 +19,14 @@ void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_
 
     qtd_buffers_vazios = 0;
     for(int i = 0; i < qtd_buffer_entrada; i++){
-      Buffer *teste = entrada[i];
+      for(int j = 0; j < qtd_buffer_entrada; j++) 
+        if(entrada[j]->proximo == entrada[j]->maxsize) reencherBuffer(entrada[j]);
+
       if (entrada[i]->proximo != entrada[i]->maxsize){
         if(auxmenor > entrada[i]->vet[entrada[i]->proximo].id){
           auxmenor = entrada[i]->vet[entrada[i]->proximo].id;
           menor = entrada[i];
         }
-      }else if(!vazio(entrada[i])){
-        reencherBuffer(entrada[i]);
       }else qtd_buffers_vazios++;
     }
 
@@ -86,12 +86,9 @@ int isSaidaOrdenada (char *nome_arquivo) {
   
   while(!feof(arq)) {
     fread(item_atual, sizeof(ITEM_VENDA), 1, arq);
-    if (item_atual[0].id < item_anterior[0].id){
-      return 0;
-    }
-    if(item_atual->id == 25366){
-      printf("lalala");
-    }
+    if (item_atual[0].id < item_anterior[0].id) return 0;
+
+
     *item_anterior = *item_atual;
   }
 
@@ -103,15 +100,13 @@ int main(int argc, char** argv){
   printf("\nGERANDO ARQUIVO ORIGINAL...\n");
   printf("====================================\n");
   // gerar_array_iv("teste.dat", (1572864/5), 42);
-  // ordenacao_externa("teste.dat", MB100, MB10, "saida.dat");
+  ordenacao_externa("teste.dat", MB100, MB10, "saida.dat");
 
 
   int resposta = isSaidaOrdenada("saida.dat");
-  if (resposta == 1) {
-    printf("A saída está ordenada\n");
-  }else if (resposta == 0) {
-    printf("A saída não está ordenada\n");
-  }
+  if (resposta) printf("A saída está ordenada\n");
+  else printf("A saída não está ordenada\n");
+  
 
   return 0;
 }
