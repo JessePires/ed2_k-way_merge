@@ -8,8 +8,13 @@
 #define MB100 104857600
 #define MB10 10485760
 
-void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_registro_entrada){
-
+void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_buffer_entrada){
+  Buffer *menor = (*entrada)[0];
+  for(int i = 0; i < qtd_registro_entrada; i++){
+    if(menor->vet[0].id < (*entrada)[i].vet[0].id){
+      menor = (*entrada)[i];
+    }
+  }
 }
 
 void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigned long int bytes_buffer_saida, char *nome_saida){
@@ -27,7 +32,7 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   for(int i = 0; i < k; i++) *buffer_entrada = criarBufferEntrada(pk[i], qtd_registro_entrada, NULL);
   Buffer *buffer_saida = criarBufferSaida(nome_saida, bytes_buffer_saida/sizeof(ITEM_VENDA));
 
-  intercalacao_k_vias(buffer_entrada, buffer_saida, qtd_registro_entrada);
+  intercalacao_k_vias(buffer_entrada, buffer_saida, k);
   printf("TESTE");
 }
 

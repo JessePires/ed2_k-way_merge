@@ -18,4 +18,4 @@ void deletarBuffer(Buffer *buffer);
 void deletarBufferSaida (Buffer *buffer);
 void inserirRegistroBufferSaida (Buffer *buffer, char *arquivo, ITEM_VENDA *item);
 
-int vazioBuffer(Buffer *buffer);
+int vazio(Buffer *buffer);
