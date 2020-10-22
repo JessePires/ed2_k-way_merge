@@ -70,7 +70,10 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   intercalacao_k_vias(buffer_entrada, buffer_saida, k);
 
   deletarBuffer(buffer_saida);
-  for(int i = 0; i < k; i++) remove(nome_arq_p[i]);
+  for(int i = 0; i < k; i++) {
+    remove(nome_arq_p[i]);
+    deletarBuffer(buffer_entrada[i]);
+  }
   printf("\n====================================");
   printf("\nFINALIZADO\n");
 }
