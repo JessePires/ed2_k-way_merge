@@ -12,12 +12,9 @@ Buffer* criarBufferSaida(char *arquivo, unsigned long int qtdRegistros){
 }
 
 void inserirRegistroBufferSaida (Buffer *buffer, ITEM_VENDA *item) {
+  if (buffer->proximo == buffer->maxsize) despejarBufferSaida(buffer);
+  
   buffer->vet[buffer->proximo] = *item;
-
-  if (buffer->proximo == buffer->maxsize) {
-    despejarBufferSaida(buffer);
-  }
-
   buffer->proximo++;
 }
 

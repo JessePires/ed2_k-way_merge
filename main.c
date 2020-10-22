@@ -15,13 +15,9 @@ void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_
   while (qtd_buffers_vazios < qtd_buffer_entrada) {
     Buffer *menor = entrada[0];
     for(int i = 0; i < qtd_buffer_entrada; i++){
-      Buffer *aux = entrada[i];
-      if (!vazio(entrada[i])) {
-        Buffer *aux2 = entrada[i];
-        if(menor->vet[0].id > entrada[i]->vet[0].id){
-          menor = entrada[i];
-        }
-      } else qtd_buffers_vazios++;
+      if (!vazio(entrada[i])) 
+        if(menor->vet[0].id > entrada[i]->vet[0].id) menor = entrada[i];
+      else qtd_buffers_vazios++;
     }
 
     ITEM_VENDA *menor_item = consomeBuffer(menor, proximoBuffer(menor));
@@ -48,14 +44,13 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   Buffer *buffer_saida = criarBufferSaida(nome_saida, bytes_buffer_saida/sizeof(ITEM_VENDA));
 
   intercalacao_k_vias(buffer_entrada, buffer_saida, k);
-  printf("TESTE");
+  printf("FINALIZADO");
 }
 
 int main(int argc, char** argv){
-  printf("sizeof(ITEM_VENDA) = %ld\n", sizeof(ITEM_VENDA));
   gerar_array_iv("teste.dat", (1572864/5), 42);
-  
   ordenacao_externa("teste.dat", MB100, MB10, "saida.dat");
+
   return 0;
 }
  
