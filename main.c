@@ -52,7 +52,7 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   //CRIANDO BUFFER
   Buffer **buffer_entrada = calloc(k, sizeof(Buffer*));
   for(int i = 0; i < k; i++) {
-    buffer_entrada[i] = criarBufferEntrada(pk[i], qtd_registro_entrada, NULL);
+    buffer_entrada[i] = criarBufferEntrada(pk[i], qtd_registro_entrada);
   }
 
   Buffer *buffer_saida = criarBufferSaida(nome_saida, bytes_buffer_saida/sizeof(ITEM_VENDA));
