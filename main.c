@@ -8,7 +8,7 @@
 #define MB100 104857600
 #define MB10 10485760
 
-void intercalacao_k_vias(Buffer **entrada, Buffer *saida){
+void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_registro_entrada){
 
 }
 
@@ -20,14 +20,14 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   
   int k = ceil((float)e/bytes_registros);
   unsigned long int qtd_registro_entrada = floor(((float)(bytes_registros-bytes_buffer_saida)/k)/sizeof(ITEM_VENDA));
-  char **pk = criarParticao("teste.dat", k);
+  char **pk = criarParticao(entrada, k);
 
   //CRIANDO BUFFER
   Buffer **buffer_entrada = calloc(k, sizeof(Buffer*));
   for(int i = 0; i < k; i++) *buffer_entrada = criarBufferEntrada(pk[i], qtd_registro_entrada, NULL);
   Buffer *buffer_saida = criarBufferSaida(nome_saida, bytes_buffer_saida/sizeof(ITEM_VENDA));
 
-  intercalacao_k_vias(buffer_entrada, buffer_saida);
+  intercalacao_k_vias(buffer_entrada, buffer_saida, qtd_registro_entrada);
   printf("TESTE");
 }
 

@@ -51,8 +51,4 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-<<<<<<< HEAD
 *.dat
-=======
-.dat
->>>>>>> 7224bc9a6a2c33462b48f97e57037c1e9ab8a41f
