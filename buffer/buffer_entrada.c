@@ -67,9 +67,3 @@ void BUFFER_ENTRADA_reencher(Buffer* buffer){
   buffer->maxsize = step;
   fread(buffer->vet, sizeof(ITEM_VENDA), step, buffer->arq);
 }
-
-void BUFFER_deletar(Buffer *buffer){
-  fclose(buffer->arq);
-  free(buffer->vet);
-  free(buffer);
-}
