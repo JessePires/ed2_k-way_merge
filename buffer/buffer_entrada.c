@@ -22,7 +22,7 @@ ITEM_VENDA* BUFFER_ENTRADA_consumir(Buffer* buffer, int i){
   if(buffer == NULL) return NULL;
   ITEM_VENDA *retorno = calloc(1, sizeof(ITEM_VENDA));
   *retorno = buffer->vet[i];
-  if(buffer->proximo == buffer->maxsize)  BUFFER_ENTRADA_reencher(buffer);
+  if(BUFFER_ENTRADA_bufferVazio(buffer))  BUFFER_ENTRADA_reencher(buffer);
   return retorno;
 }
 
@@ -30,7 +30,8 @@ int BUFFER_ENTRADA_vazio(Buffer *buffer){
   if(buffer == NULL) return 1;
 
   fpos_t posAtual;
-  unsigned long int  restoRegistros, posFinal, qtdBytes;
+  unsigned long int posFinal, qtdBytes, restoRegistros;
+  
   fgetpos(buffer->arq, &posAtual);
   fseek(buffer->arq, 0, SEEK_END);
   posFinal = ftell(buffer->arq);
@@ -39,7 +40,10 @@ int BUFFER_ENTRADA_vazio(Buffer *buffer){
 
   restoRegistros = qtdBytes/sizeof(ITEM_VENDA);
 
-  return (restoRegistros == 0) ? 1 : 0;
+  if(restoRegistros == 0) return 1;
+
+  if(restoRegistros < buffer->maxsize) buffer->maxsize = restoRegistros;
+  return 0;
 }
 
 int BUFFER_ENTRADA_bufferVazio(Buffer *buffer){
@@ -47,23 +51,8 @@ int BUFFER_ENTRADA_bufferVazio(Buffer *buffer){
 }
 
 void BUFFER_ENTRADA_reencher(Buffer* buffer){
-  fpos_t posAtual;
-  unsigned long int posFinal, qtdBytes, restoRegistros, step;
-  
-  fgetpos(buffer->arq, &posAtual);
-  fseek(buffer->arq, 0, SEEK_END);
-  posFinal = ftell(buffer->arq);
-  fsetpos(buffer->arq, &posAtual);
-  qtdBytes = posFinal - ftell(buffer->arq);
-
-  restoRegistros = qtdBytes/sizeof(ITEM_VENDA);
-
-  if(restoRegistros == 0) return;
-  
-  if(restoRegistros > buffer->maxsize) step = buffer->maxsize;
-  else  step = restoRegistros;
+  if(BUFFER_ENTRADA_vazio(buffer)) return;
 
   buffer->proximo = 0;
-  buffer->maxsize = step;
-  fread(buffer->vet, sizeof(ITEM_VENDA), step, buffer->arq);
+  fread(buffer->vet, sizeof(ITEM_VENDA), buffer->maxsize, buffer->arq);
 }

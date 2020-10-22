@@ -4,7 +4,7 @@
 #include <inttypes.h>
 #include <stdlib.h>
 #include "../buffer/buffer.h"
-#include "../big_file.h"
+#include "../big_file/big_file.h"
 #include "../particao/particao.h"
 
 void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_buffer_entrada){

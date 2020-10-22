@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "big_file.h"
+#include "big_file/big_file.h"
 #include "ordenacao_externa/ordenacao_externa.h"
 
 #define MB100 104857600
