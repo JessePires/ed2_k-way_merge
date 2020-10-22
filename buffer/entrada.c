@@ -2,14 +2,16 @@
 
 void reencherBuffer(Buffer* buffer){
   unsigned long int restoRegistros, step;
-  fpos_t qtdBytes, posAtual, posFinal;
+  fpos_t posAtual;
+  unsigned long int posFinal, qtdBytes;
   
   fgetpos(buffer->arq, &posAtual);
   fseek(buffer->arq, 0, SEEK_END);
-  fgetpos(buffer->arq, &posFinal);
+  posFinal = ftell(buffer->arq);
   fsetpos(buffer->arq, &posAtual);
+  qtdBytes = posFinal - ftell(buffer->arq);
 
-  restoRegistros = (posFinal - posAtual)/sizeof(ITEM_VENDA);
+  restoRegistros = qtdBytes/sizeof(ITEM_VENDA);
 
   if(restoRegistros == 0) return;
   
@@ -49,14 +51,15 @@ ITEM_VENDA* consomeBuffer(Buffer* buffer, int i){
 int vazio(Buffer *buffer){
   if(buffer == NULL) return 1;
 
-  fpos_t posAtual, posFinal;
-  unsigned long int  restoRegistros;
+  fpos_t posAtual;
+  unsigned long int  restoRegistros, posFinal, qtdBytes;
   fgetpos(buffer->arq, &posAtual);
   fseek(buffer->arq, 0, SEEK_END);
-  fgetpos(buffer->arq, &posFinal);
+  posFinal = ftell(buffer->arq);
   fsetpos(buffer->arq, &posAtual);
+  qtdBytes = posFinal - ftell(buffer->arq);
 
-  restoRegistros = (posFinal - posAtual)/sizeof(ITEM_VENDA);
+  restoRegistros = qtdBytes/sizeof(ITEM_VENDA);
 
   return (restoRegistros == 0) ? 1 : 0;
 }
