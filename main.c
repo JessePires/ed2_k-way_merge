@@ -54,7 +54,7 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   printf("Teremos 1 buffer de saida, com %.2f MB's\n", (float)bytes_buffer_saida/(sizeof(ITEM_VENDA)*sizeof(ITEM_VENDA)));
   printf("====================================\n");
 
-  printf("\n1 - Criando particoes, por favor aguarde...");
+  printf("1 - Criando particoes, por favor aguarde...");
   char **pk = criarParticao(entrada, k);
   
   //CRIANDO BUFFER
@@ -67,15 +67,16 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   intercalacao_k_vias(buffer_entrada, buffer_saida, k);
 
   deletarBuffer(buffer_saida);
-  printf("FINALIZADO\n");
+  printf("\n====================================");
+  printf("\nFINALIZADO\n");
 }
 
 int isSaidaOrdenada (char *nome_arquivo) {
-  ITEM_VENDA *item_anterior;
-  ITEM_VENDA *item_atual;
+  ITEM_VENDA item_anterior[1];
+  ITEM_VENDA item_atual[1];
 
   FILE *arq = fopen(nome_arquivo, "rb");
-  
+
   if(arq == NULL) {
     printf("Impossível abrir o arquivo!\n");
     return -1;
@@ -84,9 +85,13 @@ int isSaidaOrdenada (char *nome_arquivo) {
   fread(item_anterior, sizeof(ITEM_VENDA), 1, arq);
   
   while(fread(item_atual, sizeof(ITEM_VENDA), 1, arq) != EOF) {
-    if (item_atual < item_anterior) return 0;
-
-    item_anterior = item_atual;
+    if (item_atual[0].id < item_anterior[0].id) {
+      return 0;
+    }
+    if(item_atual->id == 25366){
+      printf("lalala");
+    }
+    *item_anterior = *item_atual;
   }
 
   return 1;
@@ -99,8 +104,8 @@ int main(int argc, char** argv){
   // gerar_array_iv("teste.dat", (1572864/5), 42);
   ordenacao_externa("teste.dat", MB100, MB10, "saida.dat");
 
-  
-  int resposta = isSaidaOrdenada("saida");
+
+  int resposta = isSaidaOrdenada("saida.dat");
   if (resposta == 1) {
     printf("A saída está ordenada\n");
   }else if (resposta == 0) {
