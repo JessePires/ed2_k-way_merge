@@ -58,12 +58,42 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   Buffer *buffer_saida = criarBufferSaida(nome_saida, bytes_buffer_saida/sizeof(ITEM_VENDA));
 
   intercalacao_k_vias(buffer_entrada, buffer_saida, k);
-  printf("FINALIZADO");
+
+  deletarBuffer(buffer_saida);
+  printf("FINALIZADO\n");
+}
+
+int isSaidaOrdenada (char *nome_arquivo) {
+  ITEM_VENDA *item_anterior;
+  ITEM_VENDA *item_atual;
+
+  FILE *arq = fopen(nome_arquivo, "rb");
+  
+  if(arq == NULL) {
+    printf("Impossível abrir o arquivo!\n");
+    return -1;
+  }
+
+  fread(item_anterior, sizeof(ITEM_VENDA), 1, arq);
+  
+  while(fread(item_atual, sizeof(ITEM_VENDA), 1, arq) != EOF) {
+    if (item_atual < item_anterior) return 0;
+
+    item_anterior = item_atual;
+  }
+
+  return 1;
 }
 
 int main(int argc, char** argv){
   gerar_array_iv("teste.dat", (1572864/5), 42);
   ordenacao_externa("teste.dat", MB100, MB10, "saida.dat");
+  int resposta = isSaidaOrdenada("saida");
+  if (resposta == 1) {
+    printf("A saída está ordenada\n");
+  }else if (resposta == 0) {
+    printf("A saída não está ordenada\n");
+  }
 
   return 0;
 }
