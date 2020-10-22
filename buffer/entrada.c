@@ -1,6 +1,6 @@
 #include "buffer.h"
 
-static void reencherBuffer(Buffer* buffer){
+void reencherBuffer(Buffer* buffer){
   unsigned long int restoRegistros, step;
   fpos_t qtdBytes, posAtual, posFinal;
   
@@ -10,6 +10,8 @@ static void reencherBuffer(Buffer* buffer){
   fsetpos(buffer->arq, &posAtual);
 
   restoRegistros = (posFinal - posAtual)/sizeof(ITEM_VENDA);
+
+  if(restoRegistros == 0) return;
   
   if(restoRegistros > buffer->maxsize) step = buffer->maxsize;
   else  step = restoRegistros;
@@ -36,8 +38,7 @@ int proximoBuffer(Buffer* buffer){
   if(buffer == NULL) return -1;
 
   if(buffer->proximo == buffer->maxsize)  reencherBuffer(buffer);
-
-  return buffer->proximo++;
+  if(buffer->proximo < buffer->maxsize) return buffer->proximo++;
 }
 
 ITEM_VENDA* consomeBuffer(Buffer* buffer, int i){

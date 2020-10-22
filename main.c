@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include "big_file.h"
 #include "buffer/buffer.h"
 #include "particao/particao.h"
@@ -11,24 +12,31 @@
 
 void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_buffer_entrada){
   int qtd_buffers_vazios = 0;
-  ITEM_VENDA teste = entrada[0]->vet[1];
 
-  while (qtd_buffers_vazios <= qtd_buffer_entrada) {
-    Buffer *menor = entrada[0];
+  while (qtd_buffers_vazios < qtd_buffer_entrada) {
+    Buffer *menor;
+    uint32_t auxmenor = INT32_MAX;
+
+    qtd_buffers_vazios = 0;
     for(int i = 0; i < qtd_buffer_entrada; i++){
-      if (!vazio(entrada[i])){
-        if(menor->vet[menor->proximo].id > entrada[i]->vet[entrada[i]->proximo].id) menor = entrada[i];
+      Buffer *teste = entrada[i];
+      if (entrada[i]->proximo != entrada[i]->maxsize){
+        if(auxmenor > entrada[i]->vet[entrada[i]->proximo].id){
+          auxmenor = entrada[i]->vet[entrada[i]->proximo].id;
+          menor = entrada[i];
+        }
+      }else if(!vazio(entrada[i])){
+        reencherBuffer(entrada[i]);
       }else qtd_buffers_vazios++;
     }
 
-    ITEM_VENDA *menor_item = consomeBuffer(menor, proximoBuffer(menor));
-    // if(qtd_buffers_vazios == 3){
-    //   printf("dawdawdaw");
-    //   printf("dawdaw");
-    // }
-    printf("ID_MENOR: %"PRIu32"\n", menor_item->id);
-    inserirRegistroBufferSaida(saida, menor_item);
+    if(auxmenor != INT32_MAX){
+      ITEM_VENDA *menor_item = consomeBuffer(menor, proximoBuffer(menor));
+      printf("ID_MENOR: %"PRIu32"\n", menor_item->id);
+      inserirRegistroBufferSaida(saida, menor_item);
+    }
   }
+  despejarBufferSaida(saida);
 }
 
 void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigned long int bytes_buffer_saida, char *nome_saida){

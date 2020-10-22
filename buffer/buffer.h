@@ -21,3 +21,4 @@ void inserirRegistroBufferSaida (Buffer *buffer, ITEM_VENDA *item);
 void despejarBufferSaida (Buffer *buffer);
 int proximoBuffer(Buffer* buffer);
 int vazio(Buffer *buffer);
+void reencherBuffer(Buffer* buffer);
