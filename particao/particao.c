@@ -1,5 +1,5 @@
 #include "particao.h"
-#include "../big_file.h"
+#include "../big_file/big_file.h"
 #include "../sorting/quick_sort.h"
 #include "stdlib.h"
 #include "string.h"

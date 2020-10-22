@@ -1,5 +1,5 @@
 #pragma once
-#include "../big_file.h"
+#include "../big_file/big_file.h"
 #include <stdio.h>
 #include <stdlib.h>
 
