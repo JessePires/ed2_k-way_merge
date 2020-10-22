@@ -7,7 +7,6 @@
 #define MB10 10485760
 
 int main(int argc, char** argv){
-
   printf("\nGERANDO ARQUIVO ORIGINAL...\n");
   printf("====================================\n");
   gerar_array_iv("teste.dat", (1572864/5), 42);
