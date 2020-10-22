@@ -10,6 +10,9 @@
 char **criarParticao(char *arquivo, int qtdParticoes){
   char **nomes = calloc(qtdParticoes, sizeof(char*));
   FILE *arq = fopen(arquivo, "rb");
+  int qtdDigitosVersao = 1;
+  while((qtdParticoes/10) > 1) qtdDigitosVersao++;
+
 
   fseek(arq, 0, SEEK_END);
   int resto = ftell(arq);
@@ -17,13 +20,13 @@ char **criarParticao(char *arquivo, int qtdParticoes){
   fseek(arq, 0, SEEK_SET);
   
   for(int i = 0; i < qtdParticoes; i++){ 
-    char versao[i+1];//tem q mudar isso, por ex se i = 20000 o numero de casas da versão tem q ser 5 
+    char versao[qtdDigitosVersao];
     char extensao[] = ".dat";
     sprintf(versao, "%d", i+1);
-    int x = strlen(versao)+strlen(extensao)+1;
+    int x = strlen(versao)+strlen(extensao)+11;
     char *nome_arquivo = calloc(x, sizeof(char));
 
-    strcat(nome_arquivo, "p");
+    strcat(nome_arquivo, "particao/p");
     strcat(nome_arquivo, versao);
     strcat(nome_arquivo, extensao);
     nomes[i] = malloc(strlen(nome_arquivo)+1);

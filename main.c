@@ -16,11 +16,9 @@ void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_
   while (qtd_buffers_vazios < qtd_buffer_entrada) {
     Buffer *menor;
     uint32_t auxmenor = INT32_MAX;
-    uint32_t b4;
 
     qtd_buffers_vazios = 0;
     for(int i = 0; i < qtd_buffer_entrada; i++){
-      b4 = entrada[3]->vet[entrada[3]->proximo].id;
         if (!bufferVazio(entrada[i])){
           if(auxmenor > entrada[i]->vet[entrada[i]->proximo].id){
             auxmenor = entrada[i]->vet[entrada[i]->proximo].id;
@@ -30,21 +28,22 @@ void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_
     }
 
     if(auxmenor != INT32_MAX){
-      if(auxmenor == 25341){
-        ITEM_VENDA teste = menor->vet[menor->proximo];
-        printf("lalal");
-        
-      }
       ITEM_VENDA *menor_item = consomeBuffer(menor, proximoBuffer(menor));
-      // printf("ID_MENOR: %"PRIu32"\n", menor_item->id);
       inserirRegistroBufferSaida(saida, menor_item);
     }
   }
+
   despejarBufferSaida(saida);
 }
 
 void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigned long int bytes_buffer_saida, char *nome_saida){
   FILE *arq = fopen(entrada, "rb");
+
+  if(arq == NULL){
+    printf("Arquivo %s inexistente.\n", entrada);
+    return;
+  }
+
   fseek(arq, 0, SEEK_END);
   int e = ftell(arq);
   fclose(arq);
@@ -59,12 +58,12 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   printf("====================================\n");
 
   printf("1 - Criando particoes, por favor aguarde...");
-  char **pk = criarParticao(entrada, k);
+  char **nome_arq_p = criarParticao(entrada, k);
   
   //CRIANDO BUFFER
   printf("\n2 - Preenchendo buffers, por favor aguarde...");
   Buffer **buffer_entrada = calloc(k, sizeof(Buffer*));
-  for(int i = 0; i < k; i++) buffer_entrada[i] = criarBufferEntrada(pk[i], qtd_registro_entrada);
+  for(int i = 0; i < k; i++) buffer_entrada[i] = criarBufferEntrada(nome_arq_p[i], qtd_registro_entrada);
   Buffer *buffer_saida = criarBufferSaida(nome_saida, bytes_buffer_saida/sizeof(ITEM_VENDA));
 
   printf("\n3 - Ordenando arquivos, por favor aguarde...");
@@ -82,7 +81,7 @@ int isSaidaOrdenada (char *nome_arquivo) {
   FILE *arq = fopen(nome_arquivo, "rb");
 
   if(arq == NULL) {
-    printf("Impossível abrir o arquivo!\n");
+    printf("Impossível abrir o arquivo %s!\n", nome_arquivo);
     return -1;
   }
 
@@ -91,8 +90,6 @@ int isSaidaOrdenada (char *nome_arquivo) {
   while(!feof(arq)) {
     fread(item_atual, sizeof(ITEM_VENDA), 1, arq);
     if (item_atual[0].id < item_anterior[0].id) return 0;
-
-
     *item_anterior = *item_atual;
   }
 
@@ -108,8 +105,8 @@ int main(int argc, char** argv){
 
 
   int resposta = isSaidaOrdenada("saida.dat");
-  if (resposta) printf("A saída está ordenada\n");
-  else printf("A saída não está ordenada\n");
+  if (resposta) printf("A saida esta ordenada\n");
+  else printf("A saida nao esta ordenada\n");
   
 
   return 0;

@@ -1,5 +1,5 @@
 #include "buffer.h"
-#include <inttypes.h>
+
 void reencherBuffer(Buffer* buffer){
   fpos_t posAtual;
   unsigned long int posFinal, qtdBytes, restoRegistros, step;
