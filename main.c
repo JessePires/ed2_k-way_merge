@@ -10,9 +10,9 @@ int main(int argc, char** argv){
   printf("\nGERANDO ARQUIVO ORIGINAL...\n");
   printf("====================================\n");
   gerar_array_iv("teste.dat", (1572864/5), 42);
-  ordenacao_externa("teste.dat", MB100, MB10, "saida.dat");
+  ordenacao_externa("teste.dat", MB100, MB10, "saida");
 
-  int resposta = isSaidaOrdenada("saida.dat");
+  int resposta = isSaidaOrdenada("saida");
   if (resposta) printf("A saída está ordenada\n");
   else printf("A saída não está ordenada\n");  
   printf("====================================\n");
