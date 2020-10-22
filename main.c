@@ -84,8 +84,9 @@ int isSaidaOrdenada (char *nome_arquivo) {
 
   fread(item_anterior, sizeof(ITEM_VENDA), 1, arq);
   
-  while(fread(item_atual, sizeof(ITEM_VENDA), 1, arq) != EOF) {
-    if (item_atual[0].id < item_anterior[0].id) {
+  while(!feof(arq)) {
+    fread(item_atual, sizeof(ITEM_VENDA), 1, arq);
+    if (item_atual[0].id < item_anterior[0].id){
       return 0;
     }
     if(item_atual->id == 25366){
@@ -102,7 +103,7 @@ int main(int argc, char** argv){
   printf("\nGERANDO ARQUIVO ORIGINAL...\n");
   printf("====================================\n");
   // gerar_array_iv("teste.dat", (1572864/5), 42);
-  ordenacao_externa("teste.dat", MB100, MB10, "saida.dat");
+  // ordenacao_externa("teste.dat", MB100, MB10, "saida.dat");
 
 
   int resposta = isSaidaOrdenada("saida.dat");
