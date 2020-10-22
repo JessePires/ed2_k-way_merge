@@ -1,8 +1,9 @@
 #include "buffer.h"
 
 static void reencherBuffer(Buffer* buffer){
-  if(buffer == NULL) return NULL;
-  unsigned long int qtdBytes, posAtual, posFinal, restoRegistros, step;
+  unsigned long int restoRegistros, step;
+  fpos_t qtdBytes, posAtual, posFinal;
+  
   fgetpos(buffer->arq, &posAtual);
   fseek(buffer->arq, 0, SEEK_END);
   fgetpos(buffer->arq, &posFinal);
@@ -15,7 +16,7 @@ static void reencherBuffer(Buffer* buffer){
 
   buffer->proximo = 0;
   buffer->maxsize = step;
-  fread(buffer->arq, sizeof(ITEM_VENDA), step, buffer->arq);
+  fread(buffer->vet, sizeof(ITEM_VENDA), step, buffer->arq);
 
 }
 
@@ -36,7 +37,7 @@ int proximoBuffer(Buffer* buffer){
 
   if(buffer->proximo == buffer->maxsize)  reencherBuffer(buffer);
 
-  return buffer->proximo+1;
+  return buffer->proximo++;
 }
 
 ITEM_VENDA* consomeBuffer(Buffer* buffer, int i){
@@ -47,7 +48,8 @@ ITEM_VENDA* consomeBuffer(Buffer* buffer, int i){
 int vazio(Buffer *buffer){
   if(buffer == NULL) return 1;
 
-  unsigned long int qtdBytes, posAtual, posFinal, restoRegistros;
+  fpos_t posAtual, posFinal;
+  unsigned long int  restoRegistros;
   fgetpos(buffer->arq, &posAtual);
   fseek(buffer->arq, 0, SEEK_END);
   fgetpos(buffer->arq, &posFinal);

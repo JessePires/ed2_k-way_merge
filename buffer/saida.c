@@ -15,7 +15,7 @@ void inserirRegistroBufferSaida (Buffer *buffer, ITEM_VENDA *item) {
   buffer->vet[buffer->proximo] = *item;
 
   if (buffer->proximo == buffer->maxsize) {
-    despejarBuffer(buffer, buffer->maxsize);
+    despejarBufferSaida(buffer);
   }
 
   buffer->proximo++;
