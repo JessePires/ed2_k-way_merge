@@ -6,10 +6,10 @@
 #define STEPOFREAD 10
 
 typedef struct Buffer{
-  ITEM_VENDA *vet;
-  int maxsize;
-  int proximo;
-  FILE *arq;
+  ITEM_VENDA *vet;//VETOR DE ITENS
+  int maxsize;//QUANTIDADE DE ITENS NO VETOR
+  int proximo;//PROXIMO ITEM VÁLIDO DO VETOR
+  FILE *arq;//ARQUIVO ONDE BUFFER IRÁ SE ALIMENTAR
 } Buffer;
 
 /*FUNÇÃO QUE CRIA O BUFFER DE ENTRADA
