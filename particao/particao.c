@@ -10,8 +10,12 @@
 char **criarParticao(char *arquivo, int qtdParticoes){
   char **nomes = calloc(qtdParticoes, sizeof(char*));
   FILE *arq = fopen(arquivo, "rb");
-  int qtdDigitosVersao = 1;
-  while((qtdParticoes/10) > 1) qtdDigitosVersao++;
+  int qtdDigitosVersao = 0;
+  int auxCount = qtdParticoes;
+  while(auxCount > 1){
+    qtdDigitosVersao++;
+    auxCount /= 10;
+  }
 
 
   fseek(arq, 0, SEEK_END);
