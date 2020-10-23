@@ -2,7 +2,7 @@
 
 #include "../big_file/big_file.h"
 
-/*FUNÇÃO DE ORGENAÇÃO QUICKSORT
+/*FUNÇÃO DE ORDENAÇÃO QUICKSORT
 *@param: itens = item que deveremos ordenar
 *@param: direita = posição inicial
 *@param: esquerda = posição final
