@@ -42,8 +42,8 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   int k = ceil((float)e/bytes_registros);
   unsigned long int qtd_registro_entrada = floor(((float)(bytes_registros-bytes_buffer_saida)/k)/sizeof(ITEM_VENDA));
   
-  printf("Tamanho do arquivo: %d MB's\n", (e/1024)/1024);
-  printf("Particionaremos em %d vezes, cada um com %.2f MB's\n", k, (float)((e/1024)/1024)/k);
+  printf("Tamanho do arquivo: %d MB's\n", (e/sizeof(ITEM_VENDA))/sizeof(ITEM_VENDA));
+  printf("Particionaremos em %d vezes, cada um com %.2f MB's\n", k, (float)((e/sizeof(ITEM_VENDA))/sizeof(ITEM_VENDA))/k);
   printf("Teremos %d buffers de entrada, cada um com %.2f MB's\n", k, (float)(qtd_registro_entrada)/sizeof(ITEM_VENDA));
   printf("Teremos 1 buffer de saida, com %.2f MB's\n", (float)bytes_buffer_saida/(sizeof(ITEM_VENDA)*sizeof(ITEM_VENDA)));
   printf("====================================\n");
