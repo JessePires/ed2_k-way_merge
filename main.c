@@ -27,7 +27,7 @@ int main(int argc, char** argv){
 
   printf("\nGERANDO ARQUIVO ORIGINAL...\n");
   printf("====================================\n");
-  // gerar_array_iv("teste.dat", qtdRegistros, 42);
+  gerar_array_iv("teste.dat", qtdRegistros, 42);
   
   tempo = clock();
   ordenacao_externa("teste.dat", maximoMemoria, tamBufferSaida, "saida");

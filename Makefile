@@ -7,5 +7,5 @@ all:
 	gcc -g -c particao/particao.c
 	gcc -g -c big_file/big_file.c
 	gcc -g -c ordenacao_externa/ordenacao_externa.c
-	gcc main.o quick_sort.o buffer.o buffer_entrada.o buffer_saida.o particao.o big_file.o ordenacao_externa.o -o main -lm
+	gcc -g main.o quick_sort.o buffer.o buffer_entrada.o buffer_saida.o particao.o big_file.o ordenacao_externa.o -o main -lm
 	

@@ -37,7 +37,6 @@ void gerar_array_iv(const char* arquivo_saida, unsigned int n_registros, int see
         iv[i].id_venda = i + (rand() % 2);
         iv[i].desconto = (rand() % 10) / (float)100;
         iv[i].data = t + (( -1 * (rand() % 30)) * 86400) ;
-        //printf("id_venda = %u, desconto = %.2f, data: %u\n", iv[i].id_venda, iv[i].desconto, iv[i].data);
         iv[i].obs[0] = '\0';
     }
 
