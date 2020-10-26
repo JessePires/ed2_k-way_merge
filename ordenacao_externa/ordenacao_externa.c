@@ -10,6 +10,7 @@
 void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_buffer_entrada){
   int qtd_buffers_vazios = 0;
 
+  //ENQUANTO TODOS OS BUFFER NÃO ESTIVEREM VAZIOS REALIZO LAÇO ABAIXO
   while (qtd_buffers_vazios < qtd_buffer_entrada) {
     Buffer *menor;
     uint32_t auxmenor = INT32_MAX;
@@ -24,6 +25,8 @@ void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_
         }else qtd_buffers_vazios++;
     }
 
+    //CASO AUXMENOR CONTINUE SENDO INT32_MAX ENTÃO TODOS OS BUFFERS FORAM CONSUMIDOS
+    //CASO CONTRARIO BUSCAMOS O ITEM REFERENTE AO ID, BUFFER É REECHIDO "AUTOMATICAMENTE"
     if(auxmenor != INT32_MAX){
       ITEM_VENDA *menor_item = BUFFER_ENTRADA_consumir(menor, BUFFER_ENTRADA_proximo(menor));
       BUFFER_SAIDA_inserirRegistro(saida, menor_item);
@@ -34,11 +37,13 @@ void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_
 }
 
 void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigned long int bytes_buffer_saida, char *nome_saida){
+  //ABRO ARQUIVO DE ENTRADA PARA SABER SEU TAMANHO
   FILE *arq = fopen(entrada, "rb");
   fseek(arq, 0, SEEK_END);
   int e = ftell(arq);
   fclose(arq);
 
+  //CALCULO QUANTAS PARTIÇÕES E REGISTRO NO BUFFER DE ENTRADA DEVO TER
   int k = ceil((float)e/bytes_registros);
   unsigned long int qtd_registro_entrada = floor(((float)(bytes_registros-bytes_buffer_saida)/k)/sizeof(ITEM_VENDA));
   
@@ -49,17 +54,20 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   printf("====================================\n");
 
   printf("1 - Criando particoes, por favor aguarde...");
+  //CRIO AS K-PARTIÇÕES
   char **nome_arq_buffer = criarParticao(entrada, k);
   
-  //CRIANDO BUFFER
   printf("\n2 - Preenchendo buffers, por favor aguarde...");
+  //INICIALIZO OS BUFFERS
   Buffer **buffer_entrada = calloc(k, sizeof(Buffer*));
   for(int i = 0; i < k; i++) buffer_entrada[i] = BUFFER_ENTRADA_criar(nome_arq_buffer[i], qtd_registro_entrada);
   Buffer *buffer_saida = BUFFER_SAIDA_criar(nome_saida, bytes_buffer_saida/sizeof(ITEM_VENDA));
 
   printf("\n3 - Ordenando arquivos, por favor aguarde...");
+  //FAÇO INTERCALAÇÃO NOS BUFFER DE ENTRADA REALIZANDO DUMP NO DE SAIDA
   intercalacao_k_vias(buffer_entrada, buffer_saida, k);
 
+  //DESALOCO TODOS OS DADOS
   BUFFER_deletar(buffer_saida);
   for(int i = 0; i < k; i++){
     BUFFER_deletar(buffer_entrada[i]);

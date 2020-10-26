@@ -10,6 +10,7 @@
 char **criarParticao(char *arquivo, int qtdParticoes){
   char **nomes = calloc(qtdParticoes, sizeof(char*));
   FILE *arq = fopen(arquivo, "rb");
+  //VERIFICO QUANTIDADE MÁXIMA DE DIGITOS QUE DEVO ALOCAR REFERENTE AO NUMERO DA PARTIÇÃO
   int qtdDigitosVersao = 0;
   int auxCount = qtdParticoes;
   while(auxCount > 1){
@@ -18,12 +19,14 @@ char **criarParticao(char *arquivo, int qtdParticoes){
   }
 
 
+  //CALCULO O TAMANHO DO ARQUIVO
   fseek(arq, 0, SEEK_END);
   int resto = ftell(arq);
   unsigned long int tamanho = ftell(arq)/(sizeof(ITEM_VENDA)*qtdParticoes);
   fseek(arq, 0, SEEK_SET);
   
-  for(int i = 0; i < qtdParticoes; i++){ 
+  for(int i = 0; i < qtdParticoes; i++){
+    //INICIALIZO VARIAVEIS DE CONTROLE DO NOME DA PARTIÇÃO
     char versao[qtdDigitosVersao];
     char extensao[] = ".dat";
     sprintf(versao, "%d", i+1);
@@ -36,6 +39,8 @@ char **criarParticao(char *arquivo, int qtdParticoes){
     nomes[i] = malloc(strlen(nome_arquivo)+1);
     memcpy(nomes[i], nome_arquivo, strlen(nome_arquivo)+1);
 
+    //CRIO ARQUIVO DE PARTIÇÃO E BUSCO NO ARQUIVO ORIGINAL QUANTIDADE TAM DE BYTES,
+    //ORDENANDO OS REGISTROS ENCONTRADOS E ARMAZENANDO EM SUA DEVIDA PARTIÇÃO
     FILE *destino = fopen(nome_arquivo, "wb");
     ITEM_VENDA *aux = calloc(tamanho, sizeof(ITEM_VENDA));
 
@@ -48,6 +53,7 @@ char **criarParticao(char *arquivo, int qtdParticoes){
     if(resto < 0) break;
   }
 
+  //FECHO ARQUIVO E RETORNO O NOME DE TODAS AS PARTIÇÕES
   fclose(arq);
   return nomes;
 }
