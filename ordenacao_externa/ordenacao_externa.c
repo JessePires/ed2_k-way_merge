@@ -48,9 +48,9 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   unsigned long int qtd_registro_entrada = floor(((float)(bytes_registros-bytes_buffer_saida)/k)/sizeof(ITEM_VENDA));
   
   printf("Tamanho do arquivo: %ld MB's\n", (e/sizeof(ITEM_VENDA))/sizeof(ITEM_VENDA));
-  printf("Particionaremos em %d vezes, cada um com %.2f MB's\n", k, (float)((e/sizeof(ITEM_VENDA))/sizeof(ITEM_VENDA))/k);
-  printf("Teremos %d buffers de entrada, cada um com %.2f MB's\n", k, (float)(qtd_registro_entrada)/sizeof(ITEM_VENDA));
-  printf("Teremos 1 buffer de saida, com %.2f MB's\n", (float)bytes_buffer_saida/(sizeof(ITEM_VENDA)*sizeof(ITEM_VENDA)));
+  printf("Particionaremos em %d vezes, cada um com %.3f MB's\n", k, (float)((e/sizeof(ITEM_VENDA))/sizeof(ITEM_VENDA))/k);
+  printf("Teremos %d buffers de entrada, cada um com %.3f MB's\n", k, (float)(qtd_registro_entrada)/sizeof(ITEM_VENDA));
+  printf("Teremos 1 buffer de saida, com %.3f MB's\n", (float)bytes_buffer_saida/(sizeof(ITEM_VENDA)*sizeof(ITEM_VENDA)));
   printf("====================================\n");
 
   printf("1 - Criando particoes, por favor aguarde...");
