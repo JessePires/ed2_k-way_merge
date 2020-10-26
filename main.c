@@ -32,12 +32,13 @@ int main(int argc, char** argv){
   tempo = clock();
   ordenacao_externa("teste.dat", maximoMemoria, tamBufferSaida, "saida");
   tempo = clock() - tempo;
+  printf("\nOrdenação finalizada com sucesso!\n");
 
   int resposta = isSaidaOrdenada("saida");
-  if (resposta) printf("A saída está ordenada\n");
-  else printf("A saída não está ordenada\n");
+  if (resposta) printf("A saida esta ordenada\n");
+  else printf("A saida não esta ordenada\n");
 
-  printf("Tempo gasto na ordenação: %f segundos\n", ((float)tempo)/CLOCKS_PER_SEC);
+  printf("Tempo gasto na ordenacao: %f segundos\n", ((float)tempo)/CLOCKS_PER_SEC);
   printf("====================================\n");
 
   return 0;
