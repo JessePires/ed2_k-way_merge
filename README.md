@@ -36,7 +36,7 @@ $ main quantidadeDeRegistros maximoDeMemoriaDisponivel porçãoMemoriaBufferSaid
 $ main 256000 8388608 2
 ```
 
-Obtemos as seguintes informações como saida do algoritmo.
+Obtemos as seguintes informações como saida do algoritmo.<br />
 <img src="img/exemplo.PNG" alt="">
 
 
