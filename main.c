@@ -20,6 +20,7 @@ int main(int argc, char** argv){
     maximoMemoria = atoi(argv[2]);
     div = atoi(argv[3]);
     tamBufferSaida = maximoMemoria/div;
+  }
 
   printf("\nGERANDO ARQUIVO ORIGINAL...\n");
   printf("====================================\n");
@@ -28,7 +29,7 @@ int main(int argc, char** argv){
   tempo = clock();
   ordenacao_externa("teste.dat", maximoMemoria, tamBufferSaida, "saida");
   tempo = clock() - tempo;
-  printf("\nOrdenação finalizada com sucesso!\n");
+  printf("\nOrdenacao finalizada com sucesso!\n");
 
   int resposta = isSaidaOrdenada("saida");
   if (resposta) printf("A saida esta ordenada\n");
