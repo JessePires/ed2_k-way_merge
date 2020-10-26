@@ -49,7 +49,7 @@ $ main 256000 8388608 2
 * Antes de salvar cada partição, ordenamos a mesma utilizando o algoritmo de QuickSort
 * Recebemos 2 em argv[3], então eremos um buffer de saída com 4 MB's, ou seja, 8/2
 * Teremos 32 buffers de entrada cada um com 0,125 MB's
-* Criamos e preenchemos os buffers de entrada e saida, reenchemos os mesmos caso necessario
+* Criamos e preenchemos os buffers de entrada, reenchemos o mesmo caso necessario
 * Utilizamos o algoritmo de intercalação em k-vias para preencher o buffer de saida, quando o mesmo estiver cheio, realizamos um dump no arquivo saida.dat
 * Por fim quando todos os buffers estiverem vazios teremos um arquivo saida.dat, onde todos nossos dados estarão ordenados.
 
