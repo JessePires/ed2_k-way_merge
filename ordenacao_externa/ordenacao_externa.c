@@ -55,12 +55,12 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
 
   printf("1 - Criando particoes, por favor aguarde...");
   //CRIO AS K-PARTIÇÕES
-  char **nome_arq_buffer = criarParticao(entrada, k);
+  char **nome_particoes = criarParticao(entrada, k);
   
   printf("\n2 - Preenchendo buffers, por favor aguarde...");
   //INICIALIZO OS BUFFERS
   Buffer **buffer_entrada = calloc(k, sizeof(Buffer*));
-  for(int i = 0; i < k; i++) buffer_entrada[i] = BUFFER_ENTRADA_criar(nome_arq_buffer[i], qtd_registro_entrada);
+  for(int i = 0; i < k; i++) buffer_entrada[i] = BUFFER_ENTRADA_criar(nome_particoes[i], qtd_registro_entrada);
   Buffer *buffer_saida = BUFFER_SAIDA_criar(nome_saida, bytes_buffer_saida/sizeof(ITEM_VENDA));
 
   printf("\n3 - Ordenando arquivos, por favor aguarde...");
@@ -71,14 +71,13 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   BUFFER_deletar(buffer_saida);
   for(int i = 0; i < k; i++){
     BUFFER_deletar(buffer_entrada[i]);
-    remove(nome_arq_buffer[i]);
-    free(nome_arq_buffer[i]);
+    remove(nome_particoes[i]);
+    free(nome_particoes[i]);
   }
   free(buffer_entrada);
-  free(nome_arq_buffer);
+  free(nome_particoes);
 
   printf("\n====================================");
-  printf("\nFINALIZADO\n");
 }
 
 int isSaidaOrdenada (char *nome_arquivo) {

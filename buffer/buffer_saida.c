@@ -6,7 +6,6 @@ Buffer* BUFFER_SAIDA_criar(char *arquivo, unsigned long int qtdRegistros){
   buffer->vet = calloc(qtdRegistros, sizeof(ITEM_VENDA));
   buffer->maxsize = qtdRegistros;
   buffer->proximo = 0;
-
   buffer->arq = fopen(arquivo, "wb");
 
   return buffer;
