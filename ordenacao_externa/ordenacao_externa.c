@@ -28,7 +28,7 @@ void intercalacao_k_vias(Buffer **entrada, Buffer *saida, unsigned long int qtd_
     //CASO AUXMENOR CONTINUE SENDO INT32_MAX ENTÃO TODOS OS BUFFERS FORAM CONSUMIDOS
     //CASO CONTRARIO BUSCAMOS O ITEM REFERENTE AO ID, BUFFER É REECHIDO "AUTOMATICAMENTE"
     if(auxmenor != INT32_MAX){
-      ITEM_VENDA *menor_item = BUFFER_ENTRADA_consumir(menor, BUFFER_ENTRADA_proximo(menor));
+      ITEM_VENDA menor_item = BUFFER_ENTRADA_consumir(menor, BUFFER_ENTRADA_proximo(menor));
       BUFFER_SAIDA_inserirRegistro(saida, menor_item);
     }
   }

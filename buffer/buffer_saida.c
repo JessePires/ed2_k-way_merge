@@ -12,10 +12,10 @@ Buffer* BUFFER_SAIDA_criar(char *arquivo, unsigned long int qtdRegistros){
   return buffer;
 }
 
-void BUFFER_SAIDA_inserirRegistro (Buffer *buffer, ITEM_VENDA *item) {
+void BUFFER_SAIDA_inserirRegistro (Buffer *buffer, ITEM_VENDA item) {
   if (buffer->proximo == buffer->maxsize) BUFFER_SAIDA_despejar(buffer);
 
-  buffer->vet[buffer->proximo] = *item;
+  buffer->vet[buffer->proximo] = item;
   buffer->proximo++;
 }
 

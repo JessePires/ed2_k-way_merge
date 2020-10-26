@@ -18,11 +18,9 @@ int BUFFER_ENTRADA_proximo(Buffer* buffer){
   return buffer->proximo++;
 }
 
-ITEM_VENDA* BUFFER_ENTRADA_consumir(Buffer* buffer, int i){
-  if(buffer == NULL) return NULL;
-  ITEM_VENDA *retorno = calloc(1, sizeof(ITEM_VENDA));
-  *retorno = buffer->vet[i];
-  if(BUFFER_ENTRADA_bufferVazio(buffer))  BUFFER_ENTRADA_reencher(buffer);
+ITEM_VENDA BUFFER_ENTRADA_consumir(Buffer* buffer, int i){
+  ITEM_VENDA retorno = buffer->vet[i];
+  if(BUFFER_ENTRADA_bufferVazio(buffer)) BUFFER_ENTRADA_reencher(buffer);
   return retorno;
 }
 

@@ -51,6 +51,7 @@ char **criarParticao(char *arquivo, int qtdParticoes){
     fwrite(aux, sizeof(ITEM_VENDA), tam, destino);
     fclose(destino);
     free(aux);
+    free(nome_arquivo);
     if(resto < 0) break;
   }
 

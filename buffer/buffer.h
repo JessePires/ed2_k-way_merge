@@ -30,7 +30,7 @@ int BUFFER_ENTRADA_proximo(Buffer* buffer);
 *@param: i = posição do elemento a ser consumido
 *@return: o elemento do tipo ITEM_VENDA consumido
 */
-ITEM_VENDA* BUFFER_ENTRADA_consumir(Buffer* buffer, int i);
+ITEM_VENDA BUFFER_ENTRADA_consumir(Buffer* buffer, int i);
 
 /*FUNÇÃO QUE VERIFICA SE TODOS OS REGISTROS DO ARQUIVO JÁ FORAM CONSUMIDOS
 *@param: buffer = ponteiro para o buffer
@@ -61,7 +61,7 @@ Buffer* BUFFER_SAIDA_criar(char* arquivo, unsigned long int qtdRegistros);
 *@param: buffer = ponteiro para o buffer
 *@param: item = item a ser inserido
 */
-void BUFFER_SAIDA_inserirRegistro (Buffer *buffer, ITEM_VENDA *item);
+void BUFFER_SAIDA_inserirRegistro (Buffer *buffer, ITEM_VENDA item);
 
 /*FUNÇÃO QUE DESPEJA OS REGISTROS NO ARQUIVO DE SAÍDA
 *@param: buffer: ponteiro para o buffer 

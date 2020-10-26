@@ -51,6 +51,7 @@ void gerar_array_iv(const char* arquivo_saida, unsigned int n_registros, int see
 
     fwrite(iv, sizeof(ITEM_VENDA), n_registros, saida);
     fclose(saida);
+    free(iv);
 
     return;
 }
