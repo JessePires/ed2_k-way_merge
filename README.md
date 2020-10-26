@@ -27,8 +27,15 @@ $ make
 
 # Por fim inicie o executavel
 $ main quantidadeDeRegistros maximoDeMemoriaDisponivel porçãoMemoriaBufferSaida
-
 ```
+
+### :memo: Explicação dos Argumentos
+
+| Argumento                | Descrição                                                                                          |
+|---------------------------|----------------------------------------------------------------------------------------------------|
+| quantidadeDeRegistros     | É a quantidade de registros que serão criados pelo gerador de arquivo desordenado                   |
+| maximoDeMemoriaDisponivel | Quantidade máxima de memória RAM em bytes disponível para o algoritmo utilizar durante a ordenação |
+| porçãoMemoriaBufferSaida  | Divisor que será utilizado para obter a quantidade máxima de bytes do buffer de saída              |
 
 ### :mag: Exemplo
 ```bash
