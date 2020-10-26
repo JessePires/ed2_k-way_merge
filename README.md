@@ -26,9 +26,18 @@ $ mingw32-make
 $ make
 
 # Por fim inicie o executavel
-$ gcc main quantidadeDeRegistros maximoDeMemoriaDisponivel porçãoMemoriaBufferSaida
+$ main quantidadeDeRegistros maximoDeMemoriaDisponivel porçãoMemoriaBufferSaida
 
 ```
+
+### :mag: Exemplo
+```bash
+#Executei passando os seguintes argumentos
+$ main 256000 8388608 2
+```
+<p align="center">
+<img src="img/exemplo.png" alt="">
+</p>
 
 ### Autores
 ---
