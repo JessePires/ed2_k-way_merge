@@ -35,9 +35,10 @@ $ main quantidadeDeRegistros maximoDeMemoriaDisponivel porçãoMemoriaBufferSaid
 #Executei passando os seguintes argumentos
 $ main 256000 8388608 2
 ```
-<p align="center">
-<img src="img/exemplo.png" alt="">
-</p>
+
+Obtemos as seguintes informações como saida do algoritmo.
+<img src="img/exemplo.PNG" alt="">
+
 
 ### Autores
 ---
