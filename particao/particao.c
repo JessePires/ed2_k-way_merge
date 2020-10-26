@@ -50,6 +50,7 @@ char **criarParticao(char *arquivo, int qtdParticoes){
     quickSort(aux, 0, tam-1);
     fwrite(aux, sizeof(ITEM_VENDA), tam, destino);
     fclose(destino);
+    free(aux);
     if(resto < 0) break;
   }
 
