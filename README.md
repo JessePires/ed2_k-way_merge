@@ -29,7 +29,7 @@ $ make
 $ main quantidadeDeRegistros maximoDeMemoriaDisponivel porçãoMemoriaBufferSaida
 ```
 
-### :memo: Explicação dos Argumentos
+### :mag: Explicação dos Argumentos
 
 | Argumento                | Descrição                                                                                          |
 |---------------------------|----------------------------------------------------------------------------------------------------|
@@ -37,7 +37,7 @@ $ main quantidadeDeRegistros maximoDeMemoriaDisponivel porçãoMemoriaBufferSaid
 | maximoDeMemoriaDisponivel | Quantidade máxima de memória RAM em bytes disponível para o algoritmo utilizar durante a ordenação |
 | porçãoMemoriaBufferSaida  | Divisor que será utilizado para obter a quantidade máxima de bytes do buffer de saída              |
 
-### :mag: Exemplo
+### :camera_flash: Exemplo
 ```bash
 #Executei passando os seguintes argumentos
 $ main 256000 8388608 2
@@ -65,3 +65,5 @@ Obtemos as seguintes informações como saida do algoritmo.<br />
 
 [![Gmail Badge](https://img.shields.io/badge/-jessepires@alunos.utfpr.edu.br-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:jessepires@alunos.utfpr.edu.br)](mailto:jessepires@alunos.utfpr.edu.br)
 
+## :memo: Licença
+[MIT](https://choosealicense.com/licenses/mit/)
