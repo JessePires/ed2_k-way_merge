@@ -72,7 +72,7 @@ void ordenacao_externa(char *entrada, unsigned long int bytes_registros, unsigne
   for(int i = 0; i < k; i++){
     BUFFER_deletar(buffer_entrada[i]);
     remove(nome_particoes[i]);
-    free(nome_particoes[i]);
+    free(nome_particoes[i]);  
   }
   free(buffer_entrada);
   free(nome_particoes);
