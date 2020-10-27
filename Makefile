@@ -1,11 +1,11 @@
 all:
-	gcc -g -c main.c
-	gcc -g -c sorting/quick_sort.c
-	gcc -g -c buffer/buffer.c
-	gcc -g -c buffer/buffer_entrada.c
-	gcc -g -c buffer/buffer_saida.c
-	gcc -g -c particao/particao.c
-	gcc -g -c big_file/big_file.c
-	gcc -g -c ordenacao_externa/ordenacao_externa.c
-	gcc -g main.o quick_sort.o buffer.o buffer_entrada.o buffer_saida.o particao.o big_file.o ordenacao_externa.o -o main -lm
+	gcc -c main.c -O2
+	gcc -c sorting/quick_sort.c -O2
+	gcc -c buffer/buffer.c -O2
+	gcc -c buffer/buffer_entrada.c -O2
+	gcc -c buffer/buffer_saida.c -O2
+	gcc -c particao/particao.c -O2
+	gcc -c big_file/big_file.c -O2
+	gcc -c ordenacao_externa/ordenacao_externa.c -O2
+	gcc -o main *.o -lm -O2
 	
