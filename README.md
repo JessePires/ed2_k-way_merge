@@ -26,7 +26,10 @@ $ mingw32-make
 $ make
 
 # Por fim inicie o executavel
+#Windows
 $ main quantidadeDeRegistros maximoDeMemoriaDisponivel porçãoMemoriaBufferSaida
+#Linux
+$ ./main quantidadeDeRegistros maximoDeMemoriaDisponivel porçãoMemoriaBufferSaida
 ```
 
 ### :mag: Explicação dos Argumentos
@@ -40,7 +43,10 @@ $ main quantidadeDeRegistros maximoDeMemoriaDisponivel porçãoMemoriaBufferSaid
 ### :camera_flash: Exemplo
 ```bash
 #Executei passando os seguintes argumentos
+#Windows
 $ main 256000 8388608 2
+#Linux
+$ ./main 256000 8388608 2
 ```
 
 * Recebemos 256000 em argv[1], então teremos um arquivo com 250 MB's
