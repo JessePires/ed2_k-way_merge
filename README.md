@@ -63,7 +63,7 @@ Obtemos as seguintes informações como saida do algoritmo.<br>
 
 ### :chart_with_upwards_trend: [Visualize o relatório sobre o funcionamento do algoritmo](https://github.com/jhonatancunha/ed2_k-way_merge/blob/master/APS1%20ED2%20-%20RELATORIO.pdf) 
 
-### Autores
+### 🎓 Autores
 ---
 
 <a href="https://github.com/jhonatancunha">
