@@ -4,6 +4,9 @@
 #include "big_file/big_file.h"
 #include "ordenacao_externa/ordenacao_externa.h"
 
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+
 int main(int argc, char** argv){
   unsigned long int qtdRegistros;
   unsigned long int maximoMemoria;
@@ -38,5 +41,6 @@ int main(int argc, char** argv){
   printf("Tempo gasto na ordenacao: %f segundos\n", ((float)tempo)/CLOCKS_PER_SEC);
   printf("====================================\n");
 
+  _CrtDumpMemoryLeaks();
   return 0;
 }
