@@ -1,6 +1,6 @@
 <h1 align="center">:rotating_light: Ordenação de Arquivos Grandes de Registros </h1>
 <p align="center">
- Com o objetivo de ordenar arquivos com grande quantidade de <b><i>bytes</i></b> utilizando uma quantidade limitada de memoria principal, utilizamos a técnica de particionamento. Onde cada partição é ordenada pelo algoritmo de <b><i>quicksort</i></b> e terá um buffer de entrada auxiliar, iremos então utilizar intercalação por <b><i>k-vias</i></b> para preencher o buffer de sáida.
+ Com o objetivo de ordenar arquivos com grande quantidade de <b><i>bytes</i></b> utilizando uma quantidade limitada de memoria principal, utilizamos a técnica de particionamento. Onde cada partição é ordenada pelo algoritmo de <b><i>quicksort</i></b> e terá um buffer de entrada auxiliar, iremos então utilizar intercalação por <b><i>k-vias</i></b> para preencher o buffer de saída.
  </p>
 <p align="center">
 <img src="https://img.shields.io/github/repo-size/jhonatancunha/ed2_k-way_merge" alt="">
@@ -8,7 +8,6 @@
 <img src="https://img.shields.io/github/last-commit/jhonatancunha/ed2_k-way_merge" alt="">
 </p>
 <br>
-
 
 ### :red_circle: Como utilizar
 
@@ -37,7 +36,7 @@ $ ./main quantidadeDeRegistros maximoDeMemoriaDisponivel porçãoMemoriaBufferSa
 | Argumento                | Descrição                                                                                          |
 |---------------------------|----------------------------------------------------------------------------------------------------|
 | quantidadeDeRegistros     | É a quantidade de registros que serão criados pelo gerador de arquivo desordenado                   |
-| maximoDeMemoriaDisponivel | Quantidade máxima de memória RAM em bytes disponível para o algoritmo utilizar durante a ordenação |
+| maximoDeMemoriaDisponivel | Quantidade máxima de memória RAM em bytes disponível para o algoritmo utilizar durante a ordenação 
 | porçãoMemoriaBufferSaida  | Divisor que será utilizado para obter a quantidade máxima de bytes do buffer de saída              |
 
 ### :camera_flash: Exemplo
@@ -59,11 +58,12 @@ $ ./main 256000 8388608 2
 * Utilizamos o algoritmo de intercalação em k-vias para preencher o buffer de saida, quando o mesmo estiver cheio, realizamos um dump no arquivo saida.dat
 * Por fim quando todos os buffers estiverem vazios teremos um arquivo saida.dat, onde todos nossos dados estarão ordenados.
 
-Obtemos as seguintes informações como saida do algoritmo.<br />
+Obtemos as seguintes informações como saida do algoritmo.<br>
 <img src="img/exemplo.PNG" alt="">
 
+### :chart_with_upwards_trend: [Visualize o relatório sobre o funcionamento do algoritmo](https://github.com/jhonatancunha/ed2_k-way_merge/blob/master/APS1%20ED2%20-%20RELATORIO.pdf) 
 
-### Autores
+### :mortar_board: Autores
 
 <table><tr>
 <td align="center"><a href="https://github.com/jhonatancunha">
