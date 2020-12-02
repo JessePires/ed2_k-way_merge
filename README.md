@@ -11,7 +11,7 @@
 
 ## :accept: Feedback do Professor
 
-Feedback atribuído em nosso trabalho pelo Professor Doutor Juliano Henrique Foleis que ministra o a matéria de Algoritmos e Estruturas de Dados 2 na Universidade Tecnologia Federal do Paraná (UTFPR/CM).
+Feedback atribuído em nosso trabalho pelo <b>Professor Doutor Juliano Henrique Foleis</b> que ministra a matéria de Algoritmos e Estruturas de Dados 2 na <b>Universidade Tecnologia Federal do Paraná</b> (UTFPR/CM).
 
 <img src="img/nota.PNG" alt="Nota de nosso trabalho" />
 
