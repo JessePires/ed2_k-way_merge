@@ -1,4 +1,4 @@
-<h1 align="center">:rotating_light: Ordenação de Arquivos Grandes de Registros </h1>
+﻿<h1 align="center">:rotating_light: Ordenação de Arquivos Grandes de Registros </h1>
 <p align="center">
  Com o objetivo de ordenar arquivos com grande quantidade de <b><i>bytes</i></b> utilizando uma quantidade limitada de memoria principal, utilizamos a técnica de particionamento. Onde cada partição é ordenada pelo algoritmo de <b><i>quicksort</i></b> e terá um buffer de entrada auxiliar, iremos então utilizar intercalação por <b><i>k-vias</i></b> para preencher o buffer de saída.
  </p>
@@ -11,7 +11,7 @@
 
 ## :accept: Feedback do Professor
 
-Feedback atribuído em nosso trabalho pelo <b>Professor Doutor Juliano Henrique Foleis</b> que ministra a matéria de Algoritmos e Estruturas de Dados 2 na <b>Universidade Tecnologia Federal do Paraná</b> (UTFPR/CM).
+Feedback atribuído em nosso trabalho pelo <b><i>Professor Doutor Juliano Henrique Foleis</i></b> que ministra a matéria de Algoritmos e Estruturas de Dados 2 na <b><i>Universidade Tecnologia Federal do Paraná</i></b> (UTFPR/CM).
 
 <img src="img/nota.PNG" alt="Nota de nosso trabalho" />
 
